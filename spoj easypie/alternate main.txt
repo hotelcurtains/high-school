@@ -1,0 +1,70 @@
+//a version of the Main class which has SPOJ's inputs hardcoded in
+
+class Main {
+  public static void main(String[] args) {
+		/*Scanner keyboard = new Scanner(System.in).useDelimiter("\n");
+		int repeatAmount = keyboard.nextInt();*/
+		int repeatAmount = 1;
+		
+		for(int h = 0; h < repeatAmount ; h++){
+			/*int entriesCount = keyboard.nextInt();
+
+			String allEntries = "";
+			for (int i = 0; i < entriesCount ; i++){
+				allEntries += keyboard.next()+" ";
+			}
+			*/
+			int entriesCount = 12;
+			String allEntries = "10 wawu1 B R 100 chau1 A A 2000 uwr2 B A 2010 wawu1 A R 2020 wawu1 A A 2020 wawu1 B A 4000 wawu2 C R 6000 chau1 A R 7000 chau1 A A 8000 pp1 A A 8000 zil2 B R 9000 zil2 B A";
+
+			char[] allIDs = {'a','b','c','d','e','f','g','h','i'};
+			TestCase testCase = new TestCase();
+			testCase.fillWithIDs();
+
+			while(allEntries.indexOf(" ")!=-1){
+				int time = Integer.valueOf(allEntries.substring(0,allEntries.indexOf(" "))); 
+				allEntries=allEntries.substring(allEntries.indexOf(" ")+1);
+				
+				String teamID = allEntries.substring(0,allEntries.indexOf(" "));
+				allEntries=allEntries.substring(allEntries.indexOf(" ")+1);
+				
+				char problemID = Character.toUpperCase(allEntries.charAt(0));
+				allEntries=allEntries.substring(allEntries.indexOf(" ")+1);
+				
+				char outcome = Character.toUpperCase(allEntries.charAt(0));
+				allEntries=allEntries.substring(allEntries.indexOf(" ")+1);
+				
+				Entry parsedEntry = new Entry(time, teamID, problemID, outcome);
+
+				testCase.addEntry(parsedEntry.problemID, parsedEntry);
+			}
+			
+			testCase = testCase.withoutDuplicates();
+			
+			String outputs[] = new String[testCase.allIDs.length];
+			for (char i : testCase.allIDs){
+				outputs[alphanumSwitch(i)] = Character.toUpperCase(i)+" "+testCase.numberOfAccepted(i);
+			}
+			for (char i : testCase.allIDs){
+				if(testCase.numberOfAccepted(i) != 0){
+					outputs[alphanumSwitch(i)] += " "+testCase.averageEntries(i)+" "+testCase.averageTime(i);
+				}
+			}
+
+			for(int i=0 ; i<outputs.length ; i++){
+				System.out.println(outputs[i]);
+			}
+			
+		}
+  	
+	}
+	public static int alphanumSwitch(char letter){ 
+		letter = Character.toUpperCase(letter);
+		int letterIndex = ((int)letter>=65 && (int)letter<=90) ? letter-65 : -1;
+		return letterIndex;
+	}
+	public static char alphanumSwitch(int number){ 
+		char indexLetter = (number>=0 && number<=25) ? (char)(number+65) : ' ';
+		return indexLetter;
+	}
+}
